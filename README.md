@@ -13,7 +13,7 @@ The control hand gestures for the car are forward tilt, backward tilt, left tilt
   <li>HT12E</li>
 </ul>
 
-<h3>Actuaor Used:</h3>
+<h3>Actuator Used:</h3>
 <ul>
   <li>4-Wheel Drive Chassis (comes with 4 DC motor on 4 wheels)</li>  
   <li>Motor-Driver</li>  
@@ -26,4 +26,4 @@ The control hand gestures for the car are forward tilt, backward tilt, left tilt
   <li>Jumper-wires</li>
 </ul>
 
-<h3>Circuit:</h3>
+<h3>Circuit Diagram:</h3>
