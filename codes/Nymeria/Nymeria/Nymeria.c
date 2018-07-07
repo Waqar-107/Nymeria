@@ -7,6 +7,7 @@
 
 //---------------------------------------------------------
 //in1,in2,in3 and in4 connected with D0,D1,D2 and D3 OF the RF receiver 
+//in1 in2 in3 and in4 sent through AD0,AD1,AD2 and AD3 which connected to PD0,PD1,PD2,PD3
 //in1,in2 for right pairs- when in1=1,in2=0 then clockwise and when in1=0,in2=1 then anti-clockwise
 //in3,in4 for left pairs- when in3=1,in4=0 then clockwise and when in3=0,in4=1 then anti-clockwise
 //---------------------------------------------------------
