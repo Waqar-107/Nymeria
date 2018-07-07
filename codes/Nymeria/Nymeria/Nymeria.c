@@ -47,13 +47,55 @@ void stop() {
 }
 //---------------------------------------------------------
 
+
+//---------------------------------------------------------
+void adc_init() {
+	ADMUX |= (1<<REFS0);
+	ADCSRA=(1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);
+}
+
+uint16_t read_channel(unsigned char channel) {
+	channel=0b00000111;
+	ADMUX |= channel;
+	
+	//start conversion
+	ADCSRA |= (1<<ADSC);
+	
+	//wait for the conversion to complete
+	while(!(ADCSRA & (1<<ADIF)));
+	
+	//clear ADIF
+	ADCSRA |= (1<<ADIF);
+	
+	return ADCW;
+}
+
+uint16_t getX() {
+	return read_channel(0);
+}
+
+uint16_t getY() {
+	return read_channel(1);
+}
+
+uint16_t getZ() {
+	return read_channel(2);
+}
+//---------------------------------------------------------
+
 int main(void)
 {
 	DDRD=0xFF;
 	
+	uint16_t x,y,z;
+	
     while(1)
     {
         //write necessary codes, use ADC and decide which way to goto
+		x=getX();
+		y=getY();
+		z=getZ();
+		
 		_delay_ms(500);
     }
 }
