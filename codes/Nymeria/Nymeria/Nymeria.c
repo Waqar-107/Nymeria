@@ -85,6 +85,7 @@ uint16_t getZ() {
 int main(void)
 {
 	DDRD=0xFF;
+	DDRA=0xFF;
 	
 	uint16_t x,y,z;
 	
