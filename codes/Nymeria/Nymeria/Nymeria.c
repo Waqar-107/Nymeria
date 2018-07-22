@@ -6,7 +6,7 @@
 #include <util/delay.h>
 
 //---------------------------------------------------------
-//in1,in2,in3 and in4 connected with D0,D1,D2 and D3 OF the RF receiver 
+//in1,in2,in3 and in4 connected with D0,D1,D2 and D3 OF the RF receiver
 //in1 in2 in3 and in4 sent through AD0,AD1,AD2 and AD3 which connected to PD0,PD1,PD2,PD3
 //in1,in2 for right pairs- when in1=1,in2=0 then clockwise and when in1=0,in2=1 then anti-clockwise
 //in3,in4 for left pairs- when in3=1,in4=0 then clockwise and when in3=0,in4=1 then anti-clockwise
@@ -85,17 +85,35 @@ uint16_t getZ() {
 int main(void)
 {
 	DDRD=0xFF;
-	DDRA=0xFF;
+	DDRC=0xFF;
+	DDRA=0x00;
 	
 	uint16_t x,y,z;
 	
-    while(1)
-    {
-        //write necessary codes, use ADC and decide which way to goto
-		x=getX();
-		y=getY();
-		z=getZ();
+	while(1)
+	{
+		//write necessary codes, use ADC and decide which way to goto
+		if(PINA & 0b10000000){
+			forward();
+		}
 		
-		_delay_ms(500);
-    }
+		else if(PINA & 0b01000000){
+			right();
+		}
+		
+		else if(PINA & 0b00100000){
+			left();
+		}
+		
+		else if(PINA & 0b00010000){
+			backward();
+		}
+		
+		else{
+			stop();
+			PORTC=0xFF;
+		}
+		
+		//_delay_ms(500);
+	}
 }
