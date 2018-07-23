@@ -27,3 +27,7 @@ The control hand gestures for the car are forward tilt, backward tilt, left tilt
 </ul>
 
 <h3>Circuit Diagram:</h3>
+
+<h3>Working Principles:</h3>
+<h4><u>RF-module:</u></h4> <pre>The rf module can be used with a HT12E and HT12D ICs, the connections should be according 
+to the circuits given above, <h3>the resistors used in OSC1 and OSC2 of the ICs are very important, using different resistors caused problems and data were not passing</h3></pre>
