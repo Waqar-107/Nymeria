@@ -37,6 +37,8 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../ADXL345_I2C.c \
+../I2C_master.c \
 ../Nymeria.c
 
 
@@ -47,15 +49,23 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+ADXL345_I2C.o \
+I2C_master.o \
 Nymeria.o
 
 OBJS_AS_ARGS +=  \
+ADXL345_I2C.o \
+I2C_master.o \
 Nymeria.o
 
 C_DEPS +=  \
+ADXL345_I2C.d \
+I2C_master.d \
 Nymeria.d
 
 C_DEPS_AS_ARGS +=  \
+ADXL345_I2C.d \
+I2C_master.d \
 Nymeria.d
 
 OUTPUT_FILE_PATH +=Nymeria.elf
@@ -72,6 +82,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

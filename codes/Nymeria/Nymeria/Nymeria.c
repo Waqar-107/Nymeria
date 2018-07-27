@@ -2,8 +2,8 @@
 
 #define F_CPU 1000000
 
-#include <avr/io.h>
 #include <util/delay.h>
+#include "ADXL345_I2C.h"
 
 //---------------------------------------------------------
 //in1,in2,in3 and in4 connected with D0,D1,D2 and D3 OF the RF receiver
@@ -47,73 +47,36 @@ void stop() {
 }
 //---------------------------------------------------------
 
-
-//---------------------------------------------------------
-void adc_init() {
-	ADMUX = (1<<REFS0);
-	ADCSRA=(1<<ADEN)|(1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0);
-}
-
-uint16_t read_channel(unsigned char channel) {
-	ADMUX = (1<<REFS0) | channel;
-	
-	//start conversion
-	ADCSRA |= (1<<ADSC);
-	
-	//wait for the conversion to complete
-	while(!(ADCSRA & (1<<ADIF)));
-	
-	//clear ADIF
-	ADCSRA |= (1<<ADIF);
-	
-	return ADCW;
-}
-
-uint16_t getX() {
-	return read_channel(0);
-}
-
-uint16_t getY() {
-	return read_channel(1);
-}
-
-uint16_t getZ() {
-	return read_channel(2);
-}
-//---------------------------------------------------------
-
 int main(void)
 {
 	DDRD=0xFF;
-	DDRC=0xFF;
-	DDRA=0x00;
+	DDRC=0x00;
+	DDRA=0xFF;
 	
-	uint16_t x,y,z;
+	ADXL_init();
+	
+	float acc_data[3]={0};
 	
 	while(1)
 	{
-		//write necessary codes, use ADC and decide which way to goto
-		if(PINA & 0b10000000){
+		ADXL_Acc(acc_data);
+		
+		if(acc_data[1]>=3.0)
 			forward();
-		}
 		
-		else if(PINA & 0b01000000){
-			right();
-		}
-		
-		else if(PINA & 0b00100000){
-			left();
-		}
-		
-		else if(PINA & 0b00010000){
+		else if(acc_data[1]<=-3.0)
 			backward();
-		}
 		
-		else{
+		else if(acc_data[0]>=3.0)
+			right();
+		
+		else if(acc_data[0]<=-3.0)
+			left();
+		
+		else
 			stop();
-			PORTC=0xFF;
-		}
 		
-		//_delay_ms(500);
+		
+		_delay_ms(1000);
 	}
 }
