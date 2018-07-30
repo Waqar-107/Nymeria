@@ -30,7 +30,10 @@ The control hand gestures for the car are forward tilt, backward tilt, left tilt
 
 <h3>Working Principles:</h3>
 <h4><u>RF-module:</u></h4> <pre>The rf module can be used with a HT12E and HT12D ICs, the connections should be according 
-to the circuits given above, <h3>the resistors used in OSC1 and OSC2 of the ICs are very important, using</br>different resistors caused problems and data were not passing</h3></pre>
+to the circuits given above, <h3>the resistors used in OSC1 and OSC2 of the ICs are very important, using</br>different resistors caused problems and data were not passing</br>
+We found two combinations in the net,</br> i)1M in transmitter and 51k in receiver.</br>ii)750k in transmitter and 33k in receiver.</br>
+We used 1M in the transmitter and 33k in the receiver.
+</h3></pre>
 
 <h4>ADXL345:</h4><pre>ADXL345 user I2C connection. Just 5 pins out of 8 are required.</br>
 <ul>

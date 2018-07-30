@@ -2,66 +2,54 @@
 
 #define F_CPU 1000000
 
+#include <avr/io.h>
 #include <util/delay.h>
-#include "ADXL345_I2C.h"
 
-//---------------------------------------------------------
-void sendData(unsigned char direction) {
-	//using PORTD for this purpose
-	PORTD=direction;
+//--------------------------------------------------------
+void forward(){
+	PORTB=0b00001001;
 }
 
-void forward() {
-	unsigned char direction=0b00000001;
-	sendData(direction);
+void backward(){
+	PORTB=0b00000110;
 }
 
-void backward() {
-	unsigned char direction=0b00000010;
-	sendData(direction);
+void left(){
+	PORTB=0b00001000;
 }
 
-void left() {
-	unsigned char direction=0b00000100;
-	sendData(direction);
+void right(){
+	PORTB=0b00000001;
 }
 
-void right() {
-	unsigned char direction=0b00001000;
-	sendData(direction);
+void stop(){
+	PORTB=0b00000000;
 }
-
-void stop() {
-	unsigned char direction=0b00001111;
-	sendData(direction);
-}
-//---------------------------------------------------------
+//--------------------------------------------------------
 
 int main(void)
 {
-	DDRD=0xFF;
-	DDRC=0x00;
-	DDRA=0xFF;
+	unsigned char c;
 	
-	ADXL_init();
-	
-	float acc_data[3]={0};
+	DDRA = 0x00;
+	DDRB = 0xFF;
 	
 	while(1)
 	{
-		ADXL_Acc(acc_data);
+		c = PINA;
+		c=c & 0b00001111;
 		
-		if(acc_data[1]>=4.0)
+		if(c==0b00000001)
 			forward();
 		
-		else if(acc_data[1]<=-4.0)
+		else if(c==0b00000010)
 			backward();
 		
-		else if(acc_data[0]>=4.0)
-			right();
-		
-		else if(acc_data[0]<=-4.0)
+		else if(c==0b00000100)
 			left();
+		
+		else if(c==0b00001000)
+			right();
 		
 		else
 			stop();

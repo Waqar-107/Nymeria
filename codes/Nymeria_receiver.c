@@ -7,19 +7,19 @@
 
 //--------------------------------------------------------
 void forward(){
-	PORTB=0b00000101;
+	PORTB=0b00001001;
 }
 
 void backward(){
-	PORTB=0b00001010;
+	PORTB=0b00000110;
 }
 
 void left(){
-	PORTB=0b00000001;
+	PORTB=0b00001000;
 }
 
 void right(){
-	PORTB=0b00001000;
+	PORTB=0b00000001;
 }
 
 void stop(){
@@ -44,13 +44,13 @@ int main(void)
 		
 		else if(c==0b00000010)
 			backward();
-			
+		
 		else if(c==0b00000100)
 			left();
-			
+		
 		else if(c==0b00001000)
 			right();
-			
+		
 		else
 			stop();
 	}
