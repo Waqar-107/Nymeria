@@ -71,3 +71,4 @@ left - right side moves forward, motors of left side are kept off.
 
 <h3>**antenna is not reuired for short range, but we used jumper wires (https://www.techshopbd.com/product-categories/cable/1677/jumper-wire-set-techshop-bangladesh)</h3>
 
+<a href="https://www.youtube.com/watch?v=DC8xL9xtIfE">demo</a>
